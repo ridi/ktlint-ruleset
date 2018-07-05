@@ -24,7 +24,9 @@ class NoExclamationNotOperatorRuleTest : Spek({
                     |   val a = true
                     |   val b = !a
                     |   val c = a != b
-                    |   val d = ""!!
+                    |   val d: String? = ""
+                    |   val e = d!!
+                    |   val f = "!"
                     |}""".trimMargin())
             ).isEqualTo(listOf(LintError(3, 12, rule.id, "Unexpected !, use .not() instead")))
         }
