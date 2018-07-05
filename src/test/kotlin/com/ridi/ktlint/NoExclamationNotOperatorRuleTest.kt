@@ -20,14 +20,15 @@ class NoExclamationNotOperatorRuleTest : Spek({
         it("should prohibit usage of ! operator") {
             Assertions.assertThat(
                 rule.lint("""
-                    |fun fn() {
-                    |   val a = true
-                    |   val b = !a
-                    |   val c = a != b
-                    |   val d: String? = ""
-                    |   val e = d!!
-                    |   val f = "!"
-                    |}""".trimMargin())
+                    fun fn() {
+                       val a = true
+                       val b = !a
+                       val c = a != b
+                       val d: String? = ""
+                       val e = d!!
+                       val f = "!"
+                    }
+                    """.trimIndent())
             ).isEqualTo(listOf(LintError(3, 12, rule.id, "Unexpected !, use .not() instead")))
         }
     }
