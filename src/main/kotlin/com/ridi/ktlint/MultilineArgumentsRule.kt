@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.KtNodeTypes
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.PsiWhiteSpace
 import org.jetbrains.kotlin.lexer.KtTokens
+import org.jetbrains.kotlin.psi.psiUtil.children
 
 class MultilineArgumentsRule : Rule("multiline-arguments") {
     override fun visit(
@@ -18,7 +19,9 @@ class MultilineArgumentsRule : Rule("multiline-arguments") {
             while (child.elementType != KtTokens.RPAR) {
                 if (child.textContains('\n') &&
                     child.firstChildNode?.elementType != KtNodeTypes.OBJECT_LITERAL &&
-                    child.firstChildNode?.elementType != KtNodeTypes.LAMBDA_EXPRESSION) {
+                    child.firstChildNode?.elementType != KtNodeTypes.LAMBDA_EXPRESSION &&
+                    (child.firstChildNode?.elementType == KtNodeTypes.CALL_EXPRESSION &&
+                        child.firstChildNode.children().any { it.elementType == KtNodeTypes.LAMBDA_ARGUMENT }).not()) {
                     checkNeeded = true
                     break
                 }

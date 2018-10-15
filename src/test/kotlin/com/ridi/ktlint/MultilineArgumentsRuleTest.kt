@@ -67,6 +67,8 @@ class MultilineArgumentsRuleTest : Spek({
                         quxx(1, 2,
                             { _ ->
                             })
+                        quxx(1, 2, Thread { _ ->
+                        })
                     }
                     """.trimIndent()
                 )

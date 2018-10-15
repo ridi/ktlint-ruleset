@@ -83,5 +83,9 @@ fun foo() {
     quxx(1, 2,
         { _ ->
         })
+
+    // Yes
+    quxx(1, 2, Thread { _ ->
+    })
 }
 ```
