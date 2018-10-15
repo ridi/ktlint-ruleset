@@ -1,6 +1,6 @@
 buildscript {
-    ext.kotlin_version = '1.2.51'
-    ext.ktlint_version = '0.24.0'
+    ext.kotlin_version = '1.2.71'
+    ext.ktlint_version = '0.29.0'
     repositories {
         jcenter()
         maven { url 'http://repo.spring.io/plugins-release' }
