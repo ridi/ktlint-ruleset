@@ -67,7 +67,11 @@ class MultilineArgumentsRuleTest : Spek({
                         quxx(1, 2,
                             { _ ->
                             })
-                        quxx(1, 2, Thread { _ ->
+                        quxx(1, 2, View.OnClickListener { _ ->
+                        })
+                        baz(when {
+                            true -> bar(1, 2, "", false)
+                            else -> null
                         })
                     }
                     """.trimIndent()

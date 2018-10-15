@@ -16,14 +16,28 @@ class MultilineArgumentsRule : Rule("multiline-arguments") {
         if (node.elementType == KtNodeTypes.VALUE_ARGUMENT_LIST) {
             var checkNeeded = false
             var child = node.firstChildNode.treeNext
+
             while (child.elementType != KtTokens.RPAR) {
                 if (child.textContains('\n') &&
                     child.firstChildNode?.elementType != KtNodeTypes.OBJECT_LITERAL &&
                     child.firstChildNode?.elementType != KtNodeTypes.LAMBDA_EXPRESSION &&
-                    (child.firstChildNode?.elementType == KtNodeTypes.CALL_EXPRESSION &&
-                        child.firstChildNode.children().any { it.elementType == KtNodeTypes.LAMBDA_ARGUMENT }).not()) {
-                    checkNeeded = true
-                    break
+                    child.firstChildNode?.elementType != KtNodeTypes.WHEN) {
+                    var callExpression: ASTNode?
+                    var traverse = child
+                    do {
+                        callExpression = traverse.children().firstOrNull {
+                            it.elementType == KtNodeTypes.CALL_EXPRESSION
+                        }
+                        if (callExpression != null) {
+                            break
+                        }
+                        traverse = traverse.firstChildNode
+                    } while (traverse != null)
+
+                    if (callExpression?.children()?.any { it.elementType == KtNodeTypes.LAMBDA_ARGUMENT } != true) {
+                        checkNeeded = true
+                        break
+                    }
                 }
                 child = child.treeNext
             }
