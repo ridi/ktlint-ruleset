@@ -48,6 +48,26 @@ class MultilineArgumentsRuleTest : Spek(
                                     1, 2, "", false
                                 )
                             )
+                            qux(object : A {
+                            }, 1, 2)
+                            qux(
+                                object : A {
+                                },
+                                1, 2
+                            )
+                            qux(object : A {
+                            },
+                            1, 2)
+                            quxx(1, 2, { _ ->
+                            })
+                            quxx(
+                                1, 2,
+                                { _ ->
+                                }
+                            )
+                            quxx(1, 2,
+                                { _ ->
+                                })
                         }
                         """.trimIndent()
                     )
@@ -57,7 +77,11 @@ class MultilineArgumentsRuleTest : Spek(
                         LintError(8, 9, rule.id, "No line break after the left parenthesis in multiline arguments."),
                         LintError(9, 17, rule.id, "No line break before the right parenthesis in multiline arguments."),
                         LintError(14, 9, rule.id, "No line break after the left parenthesis in multiline arguments."),
-                        LintError(16, 5, rule.id, "No line break before the right parenthesis in multiline arguments.")
+                        LintError(16, 5, rule.id, "No line break before the right parenthesis in multiline arguments."),
+                        LintError(29, 9, rule.id, "No line break after the left parenthesis in multiline arguments."),
+                        LintError(31, 8, rule.id, "No line break before the right parenthesis in multiline arguments."),
+                        LintError(39, 10, rule.id, "No line break after the left parenthesis in multiline arguments."),
+                        LintError(41, 9, rule.id, "No line break before the right parenthesis in multiline arguments.")
                     )
                 )
             }

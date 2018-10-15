@@ -15,7 +15,7 @@ Force use `.not()` method instead of an exclamation mark prefix operator(`!`) fo
 
 ### multiline-arguments
 
-There should be line breaks both after the left parenthesis and before the right parenthesis in multiline arguments.
+There should be line breaks both after the left parenthesis and before the right parenthesis in multiline arguments(except multiline by anonymous object literals or lambda expressions).
 ```kotlin
 fun foo() {
     // Yes
@@ -51,5 +51,37 @@ fun foo() {
             1, 2, "", false
         )
     )
+
+    // Yes
+    qux(object : A {
+    }, 1, 2)
+
+    // Yes
+    qux(
+        object : A {
+        },
+        1, 2
+    )
+
+    // No
+    qux(object : A {
+    },
+    1, 2)
+
+    // Yes
+    quxx(1, 2, { _ ->
+    })
+
+    // Yes
+    quxx(
+        1, 2,
+        { _ ->
+        }
+    )
+
+    // No
+    quxx(1, 2,
+        { _ ->
+        })
 }
 ```

@@ -16,7 +16,9 @@ class MultilineArgumentsRule : Rule("multiline-arguments") {
             var checkNeeded = false
             var child = node.firstChildNode.treeNext
             while (child.elementType != KtTokens.RPAR) {
-                if (child.textContains('\n')) {
+                if (child.textContains('\n') &&
+                    child.firstChildNode?.elementType != KtNodeTypes.OBJECT_LITERAL &&
+                    child.firstChildNode?.elementType != KtNodeTypes.LAMBDA_EXPRESSION) {
                     checkNeeded = true
                     break
                 }
