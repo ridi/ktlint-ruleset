@@ -66,3 +66,17 @@ task ktlint(type: JavaExec, dependsOn: classes) {
 }
 
 check.dependsOn ktlint
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            licenses {
+                license {
+                    name 'The MIT License'
+                    url 'https://opensource.org/licenses/MIT'
+                    distribution 'repo'
+                }
+            }
+        }
+    }
+}
