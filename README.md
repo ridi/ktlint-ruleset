@@ -5,7 +5,7 @@
 
 Custom ktlint ruleset for RIDI style guide.
 
-This project was written with reference to [this information](https://github.com/shyiko/ktlint#creating-a-ruleset).
+This project was written with reference to [this information](https://github.com/pinterest/ktlint#creating-a-ruleset).
 
 ## Rules
 

@@ -1,6 +1,6 @@
 buildscript {
-    ext.kotlin_version = '1.2.71'
-    ext.ktlint_version = '0.29.0'
+    ext.kotlin_version = '1.3.41'
+    ext.ktlint_version = '0.34.2'
     repositories {
         jcenter()
         maven { url 'http://repo.spring.io/plugins-release' }
@@ -44,9 +44,9 @@ configurations {
 dependencies {
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    provided "com.github.shyiko.ktlint:ktlint-core:$ktlint_version"
+    provided "com.pinterest.ktlint:ktlint-core:$ktlint_version"
 
-    testCompile "com.github.shyiko.ktlint:ktlint-test:$ktlint_version"
+    testCompile "com.pinterest.ktlint:ktlint-test:$ktlint_version"
     testCompile 'org.assertj:assertj-core:3.5.2'
     testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     testCompile('org.jetbrains.spek:spek-junit-platform-engine:1.1.5') {
@@ -54,11 +54,11 @@ dependencies {
         exclude group: 'org.jetbrains.kotlin', module: 'kotlin-reflect'
     }
 
-    ktlint "com.github.shyiko:ktlint:$ktlint_version"
+    ktlint "com.pinterest:ktlint:$ktlint_version"
 }
 
 task ktlint(type: JavaExec, dependsOn: classes) {
-    main = 'com.github.shyiko.ktlint.Main'
+    main = 'com.pinterest.ktlint.Main'
     // adding compiled classes to the classpath so that ktlint would validate project's sources
     // using its own ruleset (in other words to dogfood)
     classpath = configurations.ktlint + sourceSets.main.output
