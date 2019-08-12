@@ -1,6 +1,6 @@
 # ktlint-ruleset
 
-[![Build Status](https://travis-ci.org/ridi/ktlint-ruleset.svg?branch=master)](https://travis-ci.org/ridi/ktlint-ruleset)
+[![Build Status](https://travis-ci.com/ridi/ktlint-ruleset.svg?branch=master)](https://travis-ci.com/ridi/ktlint-ruleset)
 [![](https://jitpack.io/v/ridi/ktlint-ruleset.svg)](https://jitpack.io/#ridi/ktlint-ruleset)
 
 Custom ktlint ruleset for RIDI style guide.
